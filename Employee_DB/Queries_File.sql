@@ -53,3 +53,49 @@ select project_name, sum(hours_worked) totalHours
 from projects p
 join employeeprojects ep on ep.project_id = p.project_id
 group by p.project_id;
+
+-- 11) select the employees who earn more than the average salary
+select * 
+from employees e
+where salary > (select avg(salary) avg 
+    from employees);
+     
+-- 12) Display each project start date in the format (January 01, 2024)
+select project_name, date_format(start_date, '%M %e, %Y') as start_date
+from projects;
+
+-- 13) List all employees, their department names and the projects they have worked on
+select first_name, last_name, department_name, project_name
+from employees e 
+join departments d on d.department_id = e.department_id
+join employeeprojects ep on e.employee_id = ep.employee_id
+join projects p on p.project_id = ep.project_id;
+
+-- 14) List all projects, as 'Assigned' if any employees are assigned and 'Unassigned' otherwise
+select distinct project_name, case when ep.employee_id then 'Assigned' else 'Unassigned' end as status
+from employeeprojects ep
+right join projects p on p.project_id = ep.project_id;
+
+-- 15) find the average salary of employees in each department, but only show the deparments where more than 2 employees work
+select department_name, avg(salary) avg_salary
+from departments d
+join employees e on e.department_id = d.department_id
+group by d.department_id
+having count(employee_id) > 2;
+
+-- 16) Concatenate employees first name and last names into a single full name, separated by a space
+select concat(first_name, ' ', last_name) as fullName
+from employees;
+
+-- 17) set all employees salaries above 8000 and belonging to 'IT' department to 8500
+update employees e
+join departments d on d.department_id = e.department_id
+set salary = '8500'
+where d.department_name = 'IT' and salary > 8000;
+
+-- 18) find the employee with the highest salary who works in the 'HR' department
+
+-- 19) find employees who had been assigned to the projects that will end within the next 2 months
+
+-- 20) for each project, show the total salary billed based on the hourse worked by employees, but only for the projects where total billing exceeds 10000
+
