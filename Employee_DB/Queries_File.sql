@@ -93,9 +93,17 @@ join departments d on d.department_id = e.department_id
 set salary = '8500'
 where d.department_name = 'IT' and salary > 8000;
 
--- 18) find the employee with the highest salary who works in the 'HR' department
+-- 18) find the employee with the highest salary who works in the 'HR' department -- using nested query
+select Max(salary) sal
+from Employees 
+where department_Id = (SELECT department_id FROM departments where department_name = 'HR');
 
 -- 19) find employees who had been assigned to the projects that will end within the next 2 months
+select e.*
+from employees e
+join employeeprojects ep on e.employee_id = ep.employee_id
+join projects p on ep.project_id = p.project_id
+where coalesce(end_date,'9999-01-01') <= date_add(curdate(), interval 2 month);
 
 -- 20) for each project, show the total salary billed based on the hourse worked by employees, but only for the projects where total billing exceeds 10000
 
