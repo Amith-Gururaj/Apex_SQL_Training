@@ -105,5 +105,9 @@ join employeeprojects ep on e.employee_id = ep.employee_id
 join projects p on ep.project_id = p.project_id
 where coalesce(end_date,'9999-01-01') <= date_add(curdate(), interval 2 month);
 
--- 20) for each project, show the total salary billed based on the hourse worked by employees, but only for the projects where total billing exceeds 10000
-
+-- 20) for each project, show the total salary billed based on the hours worked by employees, but only for the projects where total billing exceeds 10000
+select ep.project_id, sum(salary) total_billing
+from employees e
+join employeeprojects ep on e.employee_id = ep.employee_id
+group by project_id
+having total_billing > 10000
