@@ -1,0 +1,22 @@
+
+//create temporary or one time activity
+create table temp_ep(project_id int, employee_id int);
+
+start TRANSACTION;
+
+//inserting all the unique records into the temp_ep table
+  insert into temp_ep(project_id, employee_id)
+  select project_id, employee_id from (
+    select *, row_number() over(partition by project_id, employee_id) as row_num
+    from employees_projects 
+    group by project_id, employee_id) as subquery
+  where row_num = 1;
+
+//deleting all the records
+delete from employees_projects;
+
+//dumping all the temp table (non-duplicate) records into table
+insert into employees_projects (project_id, employee_id)
+select project_id, employee_id from temp_ep;
+
+commit;
