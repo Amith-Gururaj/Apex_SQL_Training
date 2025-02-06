@@ -1,0 +1,229 @@
+Basic SQL Interview Questions:
+What is SQL?
+
+SQL (Structured Query Language) is a standard programming language used to manage and manipulate relational databases. 
+It allows users to query, insert, update, and delete data in databases.
+
+What is the difference between SQL and MySQL?
+
+SQL is a query language used for managing databases, while MySQL is an open-source relational database management system (RDBMS) 
+that uses SQL to query data.
+
+What is a database?
+
+A database is an organized collection of data, generally stored and accessed electronically from a computer system.
+
+What are tables in SQL?
+
+Tables are database objects that store data in rows and columns. Each row represents a record, and each column represents an 
+attribute of the record.
+
+What are the different types of SQL commands?
+
+The main SQL commands are:
+DML (Data Manipulation Language): SELECT, INSERT, UPDATE, DELETE
+DDL (Data Definition Language): CREATE, ALTER, DROP
+DCL (Data Control Language): GRANT, REVOKE
+TCL (Transaction Control Language): COMMIT, ROLLBACK
+
+What is a primary key?
+
+A primary key is a column or a set of columns in a table that uniquely identifies each record in that table. 
+It cannot have NULL values.
+
+What is a foreign key?
+
+A foreign key is a column or a set of columns in a table that refers to the primary key in another table, 
+establishing a relationship between the two tables.
+
+What is a unique key?
+
+A unique key is a constraint that ensures all values in a column are unique, but unlike the primary key, it can allow NULL values.
+
+What is an index in SQL?
+
+An index is a database object that improves the speed of data retrieval operations on a table at the cost of additional space 
+and slower writes.
+
+What is the purpose of the SELECT statement?
+
+The SELECT statement is used to query the database and retrieve data from one or more tables.
+How do you retrieve all the records from a table?
+
+You can retrieve all records from a table using:
+sql
+Copy code
+SELECT * FROM table_name;
+What is the difference between WHERE and HAVING clauses?
+
+WHERE filters rows before any grouping is done, while HAVING filters rows after the GROUP BY clause.
+What is the use of the DISTINCT keyword?
+
+The DISTINCT keyword is used to return only unique values, eliminating duplicate rows in the result set.
+What is a JOIN and what are the different types of joins?
+
+A JOIN combines columns from two or more tables based on a related column. Types of joins include:
+INNER JOIN: Returns only matching rows.
+LEFT JOIN: Returns all rows from the left table and matching rows from the right table.
+RIGHT JOIN: Returns all rows from the right table and matching rows from the left table.
+FULL OUTER JOIN: Returns all rows when there is a match in either table.
+What is the difference between INNER JOIN and OUTER JOIN?
+
+INNER JOIN returns only rows with matching values in both tables, while OUTER JOIN returns all rows from one table 
+and matching rows from the other table (if any).
+What is the GROUP BY clause used for?
+
+The GROUP BY clause is used to group rows that have the same values into summary rows, 
+often used with aggregate functions like COUNT, SUM, AVG.
+
+What is the ORDER BY clause used for?
+
+The ORDER BY clause is used to sort the result set in either ascending (ASC) or descending (DESC) order.
+What is the difference between DELETE, TRUNCATE, and DROP?
+
+DELETE: Removes rows from a table but retains the structure. It can be rolled back.
+TRUNCATE: Removes all rows from a table and cannot be rolled back.
+DROP: Removes the entire table, including its structure and data.
+What are aggregate functions?
+
+Aggregate functions perform a calculation on a set of values and return a single result, such as COUNT, SUM, AVG, MIN, and MAX.
+How do you count the number of records in a table?
+
+You can count the number of records using:
+sql
+Copy code
+SELECT COUNT(*) FROM table_name;
+Intermediate SQL Interview Questions:
+What is a subquery and how is it different from a JOIN?
+
+A subquery is a query nested inside another query, used to retrieve data for the outer query. Unlike a JOIN, 
+which combines tables, a subquery retrieves data for comparison or filtering.
+
+What is a correlated subquery?
+
+A correlated subquery refers to a subquery that uses values from the outer query. It is evaluated once for each 
+row processed by the outer query.
+
+How would you find the second-highest salary from a table?
+
+You can find the second-highest salary using a subquery:
+sql
+Copy code
+SELECT MAX(salary) FROM employees WHERE salary < (SELECT MAX(salary) FROM employees);
+What are window functions in SQL?
+
+Window functions perform calculations across a set of table rows related to the current row. 
+Examples include ROW_NUMBER(), RANK(), and LEAD().
+
+What is the purpose of the LIKE operator?
+
+The LIKE operator is used to search for a specified pattern in a column. 
+It supports wildcards like % (zero or more characters) and _ (single character).
+
+What is a CASE statement?
+
+The CASE statement is used for conditional logic in SQL. It allows returning different values based on certain conditions.
+sql
+Copy code
+SELECT CASE
+         WHEN age < 18 THEN 'Minor'
+         ELSE 'Adult'
+       END AS age_group
+FROM users;
+What is a stored procedure?
+
+A stored procedure is a set of SQL statements stored in the database, which can be executed as a single call.
+What is a trigger in SQL?
+
+A trigger is a set of SQL statements that automatically execute in response to certain events on a table, 
+such as INSERT, UPDATE, or DELETE.
+
+What is normalization?
+
+Normalization is the process of organizing a database to reduce redundancy and dependency by dividing large tables into smaller ones.
+What are the different normal forms in database normalization?
+
+The different normal forms are:
+1NF: Eliminate duplicate columns, each record has a unique identifier.
+2NF: Remove partial dependency, each non-key column must depend on the entire primary key.
+3NF: Remove transitive dependency, all columns must depend directly on the primary key.
+What is denormalization?
+
+Denormalization is the process of combining tables or adding redundant data to improve query performance, often at the cost of increased data redundancy.
+Explain the difference between UNION and UNION ALL.
+
+UNION combines the results of two queries and removes duplicates, while UNION ALL combines the results but retains duplicates.
+What is the difference between CHAR and VARCHAR data types?
+
+CHAR is a fixed-length string, while VARCHAR is a variable-length string. VARCHAR saves space when storing strings of varying lengths.
+What is the LIMIT clause used for in SQL?
+
+The LIMIT clause is used to specify the number of rows to return in the result set.
+sql
+Copy code
+SELECT * FROM table_name LIMIT 10;
+
+How can you update data in a table?
+
+Use the UPDATE statement:
+sql
+Copy code
+UPDATE table_name SET column_name = value WHERE condition;
+How do you create an index in SQL?
+
+You can create an index using:
+sql
+Copy code
+CREATE INDEX index_name ON table_name (column_name);
+What is a self-join?
+
+A self-join is a join where a table is joined with itself, often used to find relationships within the same table.
+What is the EXISTS operator in SQL?
+
+The EXISTS operator is used to test whether a subquery returns any results. It returns true if the subquery has at least one record.
+What is the IN operator in SQL?
+
+The IN operator is used to filter the results by checking if a value is in a specified list of values.
+sql
+Copy code
+SELECT * FROM table_name WHERE column_name IN (value1, value2, value3);
+How do you handle NULL values in SQL?
+
+To handle NULL values, you can use IS NULL or IS NOT NULL to check for NULL values, or COALESCE() to replace NULL with a default value.
+Advanced SQL Interview Questions:
+What is database partitioning?
+
+Database partitioning involves splitting large tables into smaller, more manageable pieces, improving performance and manageability.
+What are triggers and how do they work?
+
+A trigger automatically performs a set of actions when certain events occur in a table, such as an INSERT, UPDATE, or DELETE.
+What is SQL injection and how can you prevent it?
+
+SQL injection is a technique used to manipulate SQL queries by injecting malicious code. To prevent it, use parameterized queries or prepared statements.
+How would you design an optimized query?
+
+To optimize a query, you should use indexes, avoid using SELECT *, limit the number of rows, 
+and use EXPLAIN to analyze the query execution plan.
+What are CTEs (Common Table Expressions) in SQL?
+
+A CTE is a temporary result set defined within a query. It improves query readability and allows recursion.
+sql
+Copy code
+WITH CTE AS (SELECT * FROM table_name WHERE condition)
+SELECT * FROM CTE;
+What is an execution plan in SQL and how do you read it?
+
+An execution plan shows how SQL queries are executed by the database. It provides insights into query performance, including the types of joins and indexes used.
+How do you handle performance issues in SQL?
+
+Performance can be improved by indexing frequently queried columns, optimizing query structure, using proper joins, and partitioning large tables.
+Explain the ACID properties in SQL.
+
+ACID stands for Atomicity, Consistency, Isolation, and Durability, which are properties that guarantee reliable transaction processing.
+What is a materialized view?
+
+A materialized view stores the result of a query as a physical table, 
+improving performance for complex queries but requiring periodic refreshing.
+How do you implement transactions in SQL?
+
+Transactions are implemented using BEGIN TRANSACTION, COMMIT, and ROLLBACK. These ensure that a series of operations are completed successfully or not at all.

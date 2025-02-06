@@ -9,6 +9,11 @@ join departments d on e.department_id = d.department_id;
 select sum(hours_logged) total_hours_logged
 from employees_projects;
 
+select e.employee_id, first_name, last_name, sum(hours_logged) total_hours_logged
+from employees e 
+join employees_projects ep on e.employee_id = ep.employee_id
+group by e.employee_id;
+
 -- 3. Retrieve the department name and count of employees in each department.
 
 select department_name, count(e.employee_id) as employees_count
@@ -77,4 +82,6 @@ select concat(first_name, " ", last_name) as employee_name, sum(amount) as total
 from employees e
 join transactions t on e.employee_id = t.employee_id
 group by e.employee_id
-having total_salary > 2000
+having total_salary > 2000;
+
+-- 14. 
